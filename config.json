@@ -1,7 +1,8 @@
 {
-	"region": "Region",
-	"year": 2000,
-	"operation": "op",
-	"output": "output"
+    "target_field": "Continent",
+    "target_value": "Asia",
+    "year": "1965",
+    "operation": "average",
+    "plot_type": "bar",
+    "plot_title": "GDP Analysis for Asia (2020)"
 }
-
