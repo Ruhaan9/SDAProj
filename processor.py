@@ -9,17 +9,18 @@ def process_data(data, config):
 
     #validation
     if not data or target_year not in data[0]:
-        return {"error"}
+        return {"error": "Invalid Data or Year not found"}
 
     region_filter = lambda  row: (
             row.get(target_field) == target_value and 
-            row.get(target_year, "").strip() != ""
+            row.get(target_year, "").strip() != "" and
+            row.get(target_year).replace('.', '',1).isdigit()
     )
 
     filtered_data = list(filter(region_filter, data))
 
     if not filtered_data:
-        return {"Error"}
+        return {"error": "No data found"}
 
     extract_data = lambda row: (row["Country Name"],float(row[target_year]))
 
@@ -28,7 +29,7 @@ def process_data(data, config):
 
     #seperating into two lists for plotting using list comprehension
     country_names = [item[0] for item in mapped_data]
-    gdp_value = [item[1] for item in mapped_data]
+    gdp_values = [item[1] for item in mapped_data]
 
     count = len(gdp_values)
     total_gdp = reduce(lambda acc, x: acc + x, gdp_values, 0)
@@ -48,7 +49,7 @@ def process_data(data, config):
         "Operation": operation,
         "Result": result,
         "Count": count,
-        "Country_names": country_names,
+        "Country_Names": country_names,
         "Data_points": gdp_values
     }
 
