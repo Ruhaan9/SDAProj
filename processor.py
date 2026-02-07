@@ -21,8 +21,14 @@ def process_data(data, config):
     if not filtered_data:
         return {"Error"}
 
-    get_gdp = lambda row: float(row[target_year])
-    gdp_values = list(map(get_gdp, filtered_data))
+    extract_data = lambda row: (row["Country Name"],float(row[target_year]))
+
+    #map returning tuples
+    mapped_data = list(map(extract_data, filtered_data))
+
+    #seperating into two lists for plotting using list comprehension
+    country_names = [item[0] for item in mapped_data]
+    gdp_value = [item[1] for item in mapped_data]
 
     count = len(gdp_values)
     total_gdp = reduce(lambda acc, x: acc + x, gdp_values, 0)
