@@ -4,7 +4,7 @@ import csv
 #Open the file in read mode : r
 def load_config(filename):
     try:
-        with open('filename', 'r') as file:
+        with open(filename, 'r') as file:
            return json.load(file) 
     except FileNotFoundError:
         print("Error: Json file missing")
