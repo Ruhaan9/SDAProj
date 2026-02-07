@@ -48,6 +48,7 @@ def process_data(data, config):
         "Operation": operation,
         "Result": result,
         "Count": count,
+        "Country_names": country_names,
         "Data_points": gdp_values
     }
 
