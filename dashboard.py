@@ -59,8 +59,10 @@ def dashboard():
     else:
         print(f"Warning: Unknown plot type '{plot1}'. Defaulting to Bar.")
         ax1.bar(range(len(gdp_values)), gdp_values, color='gray')
+    
+    context_label = "Region-wise" if config.get("target_field") in ["Region", "Continent"] else "Year-specific"
+    ax1.set_title(f"{context_label} GDP Analysis ({plot1.title()})")
 
-    ax1.set_title(f"GDP by Country ({plot1.title()})")
     ax1.set_ylabel("GDP (USD)")
     ax1.grid(axis='y', linestyle='--', alpha=0.7)
 
