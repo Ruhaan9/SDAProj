@@ -1,8 +1,14 @@
 from functools import reduce
 
+def is_valid_gdp(value):
+    return value and str(value).strip() != "" and str(value).replace('.', '', 1).isdigit()
+
+
 def process_data(data, config):
 
     target_field = config.get("target_field")
+    if data and target_field not in data[0] and "Continent" in data[0]:
+        target_field = "Continent"
     target_value = config.get("target_value")
     target_year = str(config.get("year"))
     operation = config.get("operation", "average").lower()
@@ -11,25 +17,32 @@ def process_data(data, config):
     if not data or target_year not in data[0]:
         return {"error": "Invalid Data or Year not found"}
 
-    region_filter = lambda  row: (
-            row.get(target_field) == target_value and 
-            row.get(target_year, "").strip() != "" and
-            row.get(target_year).replace('.', '',1).isdigit()
-    )
 
-    filtered_data = list(filter(region_filter, data))
+    #if looking for a country, we find specific row
+    #and if looking for a region we need rows that match region and have data for the target year
+    if target_field == "Country Name":
+        filtered_data = [row for row in data if row.get("Country Name") == target_value]
+    else:
+        filtered_data = [row for row in data if row.get(target_field) == target_value and is_valid_gdp(row.get(target_year))]
 
     if not filtered_data:
         return {"error": "No data found"}
 
-    extract_data = lambda row: (row["Country Name"],float(row[target_year]))
+    country_names = []
+    gdp_values = []
 
-    #map returning tuples
-    mapped_data = list(map(extract_data, filtered_data))
-
-    #seperating into two lists for plotting using list comprehension
-    country_names = [item[0] for item in mapped_data]
-    gdp_values = [item[1] for item in mapped_data]
+    if target_field == "Country Name":
+        #logic for single country is to extract all year
+        row = filtered_data[0]
+        #all the keys are digits
+        years = [k for k in row.keys() if k.isdigit() and is_valid_gdp(row[k])]
+        country_names = years # X-axis will be Years
+        gdp_values = [float(row[y]) for y in years] # Y-axis will be GDP
+    else:
+        #logic for region extract sepcific year for all countries
+        for row in filtered_data:
+            country_names.append(row["Country Name"])
+            gdp_values.append(float(row[target_year]))
 
     count = len(gdp_values)
     total_gdp = reduce(lambda acc, x: acc + x, gdp_values, 0)
