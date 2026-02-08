@@ -7,8 +7,13 @@ def is_valid_gdp(value):
 def process_data(data, config):
 
     target_field = config.get("target_field")
-    if data and target_field not in data[0] and "Continent" in data[0]:
-        target_field = "Continent"
+    if data and target_field not in data[0]:
+        if "Region" in data[0]:
+            target_field = "Region"
+        elif "Continent" in data[0]:
+            target_field = "Continent"
+
+
     target_value = config.get("target_value")
     target_year = str(config.get("year"))
     operation = config.get("operation", "average").lower()
@@ -40,9 +45,8 @@ def process_data(data, config):
         gdp_values = [float(row[y]) for y in years] # Y-axis will be GDP
     else:
         #logic for region extract sepcific year for all countries
-        for row in filtered_data:
-            country_names.append(row["Country Name"])
-            gdp_values.append(float(row[target_year]))
+        country_names = [row["Country Name"] for row in filtered_data]
+        gdp_values = [float(row[target_year]) for row in filtered_data]
 
     count = len(gdp_values)
     total_gdp = reduce(lambda acc, x: acc + x, gdp_values, 0)
