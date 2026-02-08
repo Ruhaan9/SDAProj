@@ -3,6 +3,7 @@
     "target_value": "Asia",
     "year": "1965",
     "operation": "average",
-    "plot_type": "bar",
+    "plot1_type": "bar",
+    "plot2_type": "line",
     "plot_title": "GDP Analysis for Asia (2020)"
 }
