@@ -1,9 +1,9 @@
 {
-    "target_field": "Continent",
-    "target_value": "Asia",
-    "year": "1965",
-    "operation": "average",
+
+    "year": "1994",
+    "operation": "sum",
     "plot1_type": "bar",
-    "plot2_type": "line",
-    "plot_title": "GDP Analysis for Asia (2020)"
+    "plot2_type": "box",
+    "plot_title": "GDP Analysis for Canada (2020)"
 }
+
