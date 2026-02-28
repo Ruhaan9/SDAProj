@@ -1,9 +1,15 @@
 {
-    "target_field": "Continent",
-    "target_value": "Asia",
-    "year": "1965",
-    "operation": "average",
-    "plot1_type": "bar",
-    "plot2_type": "line",
-    "plot_title": "GDP Analysis for Asia (2020)"
+  "io_settings": {
+    "input_source": "json",
+    "input_path": "gdp_with_continent_filled.json",
+    "output_sink": "console"
+  },
+  "analysis_settings": {
+    "operation": "top_10_countries",
+    "continent": "Continent",
+    "target_year": "2020",
+    "start_year": "2010",
+    "end_year": "2020",
+    "decline_years": 5
+  }
 }
