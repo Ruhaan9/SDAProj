@@ -1,10 +1,11 @@
 # plugins/inputs.py
 import json
 import csv
-from typing import Any
+from core.contracts import PipelineService
 
 class JsonReader:
-    def __init__(self, service_handler: Any, file_path: str):
+    #explicit definition for PipelineService
+    def __init__(self, service_handler: PipelineService, file_path: str):
         # save the handler and file path
         self.service_handler = service_handler
         self.file_path = file_path
@@ -89,7 +90,8 @@ class JsonReader:
             print(f"Error loading JSON: {e}")
 
 class CsvReader:
-    def __init__(self, service_handler: Any, file_path: str):
+    #explicit definition for PipelineService
+    def __init__(self, service_handler: PipelineService, file_path: str):
         # save the handler and file path
         self.service_handler = service_handler
         self.file_path = file_path
