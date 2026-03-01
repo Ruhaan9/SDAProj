@@ -1,3 +1,4 @@
+# engine.py
 from typing import List, Dict, Any
 from core.contracts import DataSink
 
@@ -63,7 +64,7 @@ class GDPEngine:
         try:
             val = row.get(year)
             return val is not None and str(val).strip() != "" and str(val).lower() != "nan"
-        except Exception:
+        except (ValueError, TypeError):
             return False
 
     def _transform(self, data: List[Dict], op: str, year: str, years_range: List[str], decline_years: int) -> Dict[str, Any]:
