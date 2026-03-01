@@ -2,17 +2,19 @@ import json
 import sys
 
 # import our stuff
-from plugins import JsonReader
-from plugins import ConsoleWriter
+from plugins import JsonReader, CsvReader
+from plugins import ConsoleWriter, FileWriter
 from core import GDPEngine
 
 # set up dictionaries for the plugins
 INPUT_DRIVERS = {
-    "json": JsonReader
+    "json": JsonReader,
+    "csv": CsvReader
 }
 
 OUTPUT_DRIVERS = {
-    "console": ConsoleWriter
+    "console": ConsoleWriter,
+    "file": FileWriter
 }
 
 def bootstrap():
