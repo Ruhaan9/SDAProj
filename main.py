@@ -2,9 +2,9 @@ import json
 import sys
 
 # import our stuff
-from plugins.inputs import JsonReader
-from plugins.outputs import ConsoleWriter
-from core.engine import GDPEngine
+from plugins import JsonReader
+from plugins import ConsoleWriter
+from core import GDPEngine
 
 # set up dictionaries for the plugins
 INPUT_DRIVERS = {
