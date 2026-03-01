@@ -86,8 +86,10 @@ class JsonReader:
 
         except FileNotFoundError:
             print(f"Error: The file {self.file_path} was not found.")
-        except Exception as e:
-            print(f"Error loading JSON: {e}")
+        except PermissionError:
+            print(f"Error: Permission denied when trying to read {self.file_path}.")
+        except OSError as e:
+            print(f"OS Error while accessing JSON: {e}")
 
 class CsvReader:
     #explicit definition for PipelineService
@@ -114,5 +116,9 @@ class CsvReader:
             
         except FileNotFoundError:
             print(f"Error: The file {self.file_path} was not found.")
-        except Exception as e:
-             print(f"Error loading CSV: {e}")
+        except csv.Error as e:
+            print(f"Error formatting/parsing CSV file: {e}")
+        except PermissionError:
+            print(f"Error: Permission denied when trying to read {self.file_path}.")
+        except OSError as e:
+             print(f"OS Error while accessing CSV: {e}")
