@@ -5,9 +5,10 @@
     "output_sink": "console"
   },
   "analysis_settings": {
-    "operation": "top_10_countries",
-    "continent": "Continent",
-    "target_year": "2020",
+    "operation": "top_10",
+    "region_type": "Continent",
+    "region_value": "Asia",
+    "year": "2020",
     "start_year": "2010",
     "end_year": "2020",
     "decline_years": 5
