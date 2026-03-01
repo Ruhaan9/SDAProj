@@ -1,5 +1,5 @@
 
-from engine import GDPEngine
+from .engine import GDPEngine
 
 """The core package acts as the Domain Authority, 
 defining the system's business logic and the
